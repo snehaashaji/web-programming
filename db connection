@@ -1,0 +1,95 @@
+connection.php
+
+<?php
+$servername="localhost";
+$username="root";
+$password="";
+$dbname="sneha";
+$conn=mysqli_connect($servername,$username,$password,$dbname);
+if(!$conn)
+{
+die("Connection failed!".mysqli_connect_error());
+}
+else
+{
+ echo "Database connected<br><br>";
+}
+?>
+
+home1.php
+<html>
+    <body bgcolor="green">
+    <center>
+    <br><br>
+    <br><br>
+    Welcome to PHP Database<b>HOME PAGE</b>
+    <br><br>
+    <br><br>
+    <form action="insert.php" method="POST">
+    <br><br>
+    <input type="submit" valu"Insert" name="btn">
+    </form>
+    
+    <form action="delete.php" method="POST">
+    
+		
+    <input type="submit" value="Delete" name="btn">
+    </form>
+
+    <form action="displayall.php" method="POST">
+	
+    <input type="submit" value="Display All" name="btn">
+    </form>
+
+
+    </center> 
+	
+	
+    </body>
+</html>
+
+insert.php
+
+<html>
+	<body>
+	<form action="insertuser.php" method="POST">
+	<center><br><br>
+	ENTER USERNAME:&nbsp&nbsp&nbsp&nbsp&nbsp
+	<input type="text" name="username" placeholder="USERNAME">
+	<br><br>
+	
+	<input type="submit" value="Insert" name="btn">
+	</center> 
+	
+	</form>
+	</body>
+</html>
+
+insertuser.php
+
+<html>
+<body>
+<form action="home1.php" method="POST">
+<center>
+<?php
+	include 'conn.php';
+	
+	
+	$usrname=$_POST['username'];
+	
+	$sql_1="INSERT INTO user(name) VALUES('$usrname')";
+	$result_1=mysqli_query($conn,$sql_1);
+	if(!$result_1)
+		{
+		$msg="Error !!!".mysqli_error($conn);
+		}
+	else
+		echo"Insertion Success!!!";
+	mysqli_close($conn);
+	
+	?>
+<br><br>	
+<input type="submit" value="Home Page" name="btn">
+</form>
+</body>
+</html>
